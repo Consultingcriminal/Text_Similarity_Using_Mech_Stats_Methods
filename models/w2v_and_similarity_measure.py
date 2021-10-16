@@ -71,10 +71,9 @@ class similarity_measure_features:
 
 
 
-'''
+if __name__ == '__main__':
 
-obj = similarity_measure_features(data)
-obj.convert_sentence_to_vector()
-obj.create_distance_based_feature()
+    obj = similarity_measure_features(data)
+    obj.convert_sentence_to_vector()
+    obj.create_distance_based_feature()
 
-'''

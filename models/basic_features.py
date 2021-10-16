@@ -16,9 +16,9 @@ class basic_features:
         self.my_dataframe['len_char_q2'] = self.my_dataframe.question2.apply(lambda x: len(''.join(set(str(x).replace(' ', '')))))
 
 
-'''
 
-obj = basic_features(data)
-obj.create_basic_features()
+if __name__ == '__main__':
+    obj = basic_features(data)
+    obj.create_basic_features()
 
-'''
+

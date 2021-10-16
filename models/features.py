@@ -92,18 +92,16 @@ class features:
                                                                    np.nan_to_num(self.question2_vectors))]
 
 
-'''
+if __name__ == '__main__':
+    model = gensim.models.KeyedVectors.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
 
-model = gensim.models.KeyedVectors.load_word2vec_format('./GoogleNews-vectors-negative300.bin', binary=True)
+    data = pd.read_csv('Cleaned_text.csv')
+    data = data.drop(['id', 'qid1', 'qid2'], axis=1)
 
-data = pd.read_csv('Cleaned_text.csv')
-data = data.drop(['id', 'qid1', 'qid2'], axis=1)
-
-obj = features(data, model)  ->> Pass dataframe and model as argumnet to class features.
-obj.create_basic_features()
-obj.create_fuzzy_features()
-obj.convert_sentence_to_vector()
-obj.create_distance_based_features()
+    obj = features(data, model)  ->> Pass dataframe and model as argumnet to class features.
+    obj.create_basic_features()
+    obj.create_fuzzy_features()
+    obj.convert_sentence_to_vector()
+    obj.create_distance_based_features()
 
 
-'''

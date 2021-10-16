@@ -62,13 +62,11 @@ class text_processing:
 
 
 
-'''
-df = pd.read_csv("./train.csv")
-obj = text_processing(df)
-obj.tokenize()
-obj.remove_stop_words()
-obj.do_lemmatization()
-
-contents of df will be modified. 
-
-'''
+if __name__ == '__main__':
+    df = pd.read_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/raw/train.csv")
+    obj = text_processing(df)
+    obj.tokenize()
+    obj.remove_stop_words()
+    a = obj.my_dataframe
+    obj.do_lemmatization()
+    #contents of df will be modified. 

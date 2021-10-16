@@ -16,9 +16,8 @@ class fuzzy_features:
        
         
 
-'''
 
-obj = fuzzy_features(data)
-obj.create_fuzzy_features()
+if __name__ == '__main__':
+    obj = fuzzy_features(data)
+    obj.create_fuzzy_features()
 
-'''
