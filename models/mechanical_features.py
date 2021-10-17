@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
+from tqdm import tqdm
 
 class vectors:
 
@@ -80,18 +81,22 @@ class similarity:
 if __name__ == "__main__":
     
     # Getting the Vectors
-    train = pd.read_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/raw/train.csv",nrows = 100)
-    train = train.fillna('Undefined')
-    vc = vectors(train)
-    vc.CVec()
-    a = vc.my_dataframe
-    a.to_pickle("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/my_csv.pkl") #Saving as pickle
+    #train = pd.read_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/raw/train.csv")
+    #train = train.fillna('Undefined')
+    #vc = vectors(train)
+    #vc.CVec()
+    #a = vc.my_dataframe
+    #a.to_pickle("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/my_csv.pkl") #Saving as pickle
 
     # Finding Similarity Measures
     train = pd.read_pickle("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/my_csv.pkl")
-    lambda_val = 1.30 #Improve According to a loop
-    fs = similarity(train,lambda_val)
+    train = train[['id','Vectors']]
 
-    fs.find_similarity()
-    a = fs.my_dataframe
-    a.to_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/my_csv_similarity_{}".format(lambda_val),index = False)
+    lambda_val = [0.99,1.25,1.5,2] #Improve According to a loop
+
+    for value in tqdm(lambda_val):
+        fs = similarity(train,value)
+        fs.find_similarity()
+        a = fs.my_dataframe
+        a = a[["id","mech_sim_{}".format(value)]]
+        a.to_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/my_csv_similarity_{}".format(value),index = False)
