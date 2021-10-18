@@ -87,7 +87,7 @@ class features:
     def wmd(self, s1, s2):
         s1 = str(s1).lower().split()
         s2 = str(s2).lower().split()
-        return model.wmdistance(s1, s2)
+        return self.gensim_model.wmdistance(s1, s2)
             
             
     def create_distance_based_features(self):
