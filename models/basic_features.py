@@ -18,6 +18,10 @@ class basic_features:
 
 
 if __name__ == '__main__':
+
+    
+    csv_path = "" # Path of cleaned_text csv file
+    data = pd.read_csv(csv_path)
     obj = basic_features(data)
     obj.create_basic_features()
 
