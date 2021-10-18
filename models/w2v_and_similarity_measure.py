@@ -66,13 +66,16 @@ class similarity_measure_features:
             self.my_dataframe['wmd'] = self.my_dataframe.apply(lambda x: wmd(x['question1'], x['question2']), axis=1)
             
             
-            self.my_dataframe['cityblock_distance'] = [cityblock(x, y) for (x, y) in zip(np.nan_to_num(question1_vectors),
-                                                          np.nan_to_num(question2_vectors))]
+            self.my_dataframe['cityblock_distance'] = [cityblock(x, y) for (x, y) in zip(np.nan_to_num(self.question1_vectors),
+                                                          np.nan_to_num(self.question2_vectors))]
 
 
 
 if __name__ == '__main__':
 
+   
+    csv_path = ""  # Path of cleaned_text csv file
+    data = pd.read_csv(csv_path)
     obj = similarity_measure_features(data)
     obj.convert_sentence_to_vector()
     obj.create_distance_based_feature()
