@@ -17,6 +17,24 @@ def sent2vec(s):
         M = np.array(M)
         v = M.sum(axis=0)
         return v / np.sqrt((v ** 2).sum())
+
+def get_features(df):
+    df['dissimilarity'] = df['euclidean_distance']**2
+    df['diss_pre_abs'] = df['dissimilarity']/(1+ df['pre_abs'])
+    df['diss_pre_pre']  = df['dissimilarity']/(1+ df['pre_pre'])
+    df['diss'] = df['dissimilarity']/(1 + df['pre_abs'] + df['pre_pre'])
+    df['log_diss_pre_abs'] = np.log(df['dissimilarity']/(1+ df['pre_abs']))
+    df['log_diss_pre_pre'] = np.log(df['dissimilarity']/(1+ df['pre_pre']))
+    df['log_diss'] = np.log(df['dissimilarity']/(1 + df['pre_abs'] + df['pre_pre']))
+
+    df['similarity_1'] = 1/(1 + df['dissimilarity'])
+    df['similarity_2'] = 1/(1 + df['diss_pre_abs'])
+    df['similarity_3'] = 1/(1 + df['diss_pre_pre'])
+    df['similarity_4'] = 1/(1 + df['diss'])
+    df['similarity_5'] = 1/(1 + df['log_diss_pre_abs'])
+    df['similarity_6'] = 1/(1 + df['log_diss_pre_pre'])
+    df['similarity_7'] = 1/(1 + df['log_diss'])
+        
     
 class differenced_sent:
 
@@ -75,7 +93,7 @@ class mech_measures:
 
 if __name__ == '__main__':
     
-    #df = pd.read_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/Cleaned_text.csv")
+    #df = pd.read_csv("/home/vulcan/Documents/Niggas_TP/text_similarity/text_similarity/data/processed/Cleaned_text.csv",nrows = 5)
     #print('Initialising differenced_set')
     #ds = differenced_sent(df)
     #print('Reducing Sentences')
